@@ -80,8 +80,19 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         if(speed > 0) {
                             sleep((long) (10));
+
                             rotateImage();
                             speed -= 0.5f;
+                        }
+                        if(speed % 200 == 0 && speed != 0){
+                            MediaPlayer mp = MediaPlayer.create(getBaseContext(), R.raw.sergey_scream);
+                            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mp) {
+                                    mp.release();
+                                }
+                            });
+                            mp.start();
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -96,14 +107,6 @@ public class MainActivity extends AppCompatActivity {
                 highscore+=1;
                 TextView score = findViewById(R.id.tvScore);
                 score.setText("Score: "+highscore);
-                MediaPlayer mp = MediaPlayer.create(getBaseContext(), R.raw.sergey_scream);
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                mp.start();
                 if(speed < 5000){
                     speed += 50;
                     Log.d("Not Limit",""+speed);
