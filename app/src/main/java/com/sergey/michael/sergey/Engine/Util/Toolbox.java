@@ -3,6 +3,7 @@ package com.sergey.michael.sergey.Engine.Util;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -68,15 +69,18 @@ public class Toolbox {
        adManager = new AdManager(activity,this);
     }
 
-    public void setup_Toolbar(MainActivity myActivity, int toolbar_view){
-        //ALSO SET @style/AppTheme.NoActionBar IN THE MANIFEST
-        if(!Features.toolbar){
+    public void setup_Toolbar(MainActivity myActivity, int toolbar_view, int app_bar_layout){
+        if(Features.toolbar){
             toolbar = activity.findViewById(toolbar_view);         //in app_bar_main.xml
             myActivity.setSupportActionBar(toolbar);
         }
+        else{
+            AppBarLayout applay = activity.findViewById(app_bar_layout);
+            applay.setVisibility(View.GONE);
+        }
     }
 
-    public void setup_Drawer(int nav_view, int drawer_layout, int open, int close){
+    public void setup_Drawer(Activity activity, int nav_view, int drawer_layout, int open, int close){
         if(Features.drawer) {
             drawer = new Drawer(activity,nav_view,drawer_layout);
             DrawerLayout drawer = activity.findViewById(drawer_layout);
@@ -85,12 +89,16 @@ public class Toolbox {
             drawer.addDrawerListener(toggle);
             toggle.syncState();
         }
+        else{
+            DrawerLayout drawlay = activity.findViewById(drawer_layout);
+            drawlay.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
     }
 
-    public void setup_Spinner(int id, String[] items){
+    public void setup_Spinner(int id, String[] items, int spinner){
         Spinner dropdown = activity.findViewById(id);
         SpinnerListener listener = new SpinnerListener();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, spinner, items);
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(listener);
     }

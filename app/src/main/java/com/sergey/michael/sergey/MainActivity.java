@@ -31,21 +31,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.drawer);
+        setContentView(R.layout.drawer_view);
 
         toolbox = new Toolbox(this);
-        toolbox.setup_Toolbar(this,R.id.toolbar);
-        toolbox.setup_Drawer(R.id.nav_view,R.id.drawer_layout,
+        toolbox.setup_Toolbar(this,R.id.toolbar,R.id.app_bar_layout);
+        toolbox.setup_Drawer(this, R.id.nav_view,R.id.drawer_layout,
                 R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        high_score = sharedPref.getInt(getString(R.string.preference_file_key), 0);
 
         tv_score = findViewById(R.id.tvScore);
         tv_score.setText("Score: "+ high_score);
         tv_speed = findViewById(R.id.tvSpeed);
         tv_speed.setText("Speed: "+ speed);
 
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        high_score = sharedPref.getInt(getString(R.string.preference_file_key), 0);
         img = findViewById(R.id.sergey);
         manipulateImage();
         img.setOnClickListener(new View.OnClickListener() {
