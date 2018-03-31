@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark"
-    tools:context="com.sergey.michael.sergey.MainActivity">
+    tools:context="com.sergey.michael.sergey.MainActivity"
+    tools:showIn="@layout/toolbar_view">
 
     <ImageView
         android:id="@+id/sergey"
@@ -32,7 +33,26 @@
         android:text="Score: 0"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/sergey"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvSpeed"
+        app:layout_constraintHorizontal_bias="0.532"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.537" />
+
+    <TextView
+        android:id="@+id/tvSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginTop="8dp"
+        android:text="Speed: 0"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/sergey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.537"
+        android:layout_marginRight="92dp" />
+
+
 </android.support.constraint.ConstraintLayout>

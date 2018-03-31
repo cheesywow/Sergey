@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">Sergey</string>
     <string name ="preference_file_key"></string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="AveragedApproach">Averaged Approach</string>
+    <string name="KNNApproach">KNN Approach</string>
+    <string name="LongKNNApproach">Long KNN Approach</string>
+    <string name="NeuralNet">Neural Net</string>
+
+    <string name="PashBoard">Pashboard</string>
+    <string name="communicate">Communicate</string>
 </resources>
