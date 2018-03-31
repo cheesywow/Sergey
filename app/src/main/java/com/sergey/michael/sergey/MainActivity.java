@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sergey.michael.sergey.Engine.Navigation.BottomNavigation;
 import com.sergey.michael.sergey.Engine.Util.Toolbox;
 
 import static java.lang.Thread.sleep;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         toolbox.setup_Toolbar(this,R.id.toolbar,R.id.app_bar_layout);
         toolbox.setup_Drawer(this, R.id.nav_view,R.id.drawer_layout,
                 R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+
+        BottomNavigation navigation = new BottomNavigation(this,R.id.nav_view);
 
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);

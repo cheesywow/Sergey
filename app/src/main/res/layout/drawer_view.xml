@@ -30,6 +30,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
+                <android.support.design.widget.BottomNavigationView
+                    android:id="@+id/navigation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@color/dark"
+                    android:theme="@style/AppTheme.PopupOverlay"
+                    app:itemIconTint="@color/white"
+                    app:itemTextColor="@color/white"
+                    app:menu="@menu/navigation" />
+
             </FrameLayout>
 
 
