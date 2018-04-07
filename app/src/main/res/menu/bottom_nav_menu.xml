@@ -1,39 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/navigation_menu">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <item
-        android:id="@+id/nav_camera"
-        android:fillColor="#FF000000"
+        android:id="@+id/bottom_nav_camera"
         android:checked="false"
         android:icon="@drawable/ic_menu_camera"
         android:title="Lock"/>
 
     <item
-        android:id="@+id/nav_gallary"
-        android:fillColor="#FF000000"
+        android:id="@+id/bottom_nav_gallary"
         android:checked="false"
         android:icon="@drawable/ic_menu_gallery"
         android:title="Forum"/>
 
     <item
-        android:id="@+id/nav_slideshow"
-        android:fillColor="#FF000000"
+        android:id="@+id/bottom_nav_slideshow"
         android:checked="false"
         android:icon="@drawable/ic_menu_slideshow"
         android:title="Notes"/>
 
     <item
-        android:id="@+id/nav_send"
-        android:fillColor="#FF000000"
+        android:id="@+id/bottom_nav_send"
         android:checked="false"
         android:icon="@drawable/ic_menu_send"
         android:title="Reminders"/>
 
     <item
-        android:id="@+id/nav_share"
-        android:fillColor="#FF000000"
+        android:id="@+id/bottom_nav_share"
         android:checked="false"
         android:icon="@drawable/ic_menu_share"
         android:title="Settings"/>

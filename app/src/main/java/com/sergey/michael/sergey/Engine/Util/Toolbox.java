@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +14,7 @@ import android.widget.Spinner;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.sergey.michael.sergey.Engine.Listeners.SpinnerListener;
+import com.sergey.michael.sergey.Engine.Navigation.BottomNavigation;
 import com.sergey.michael.sergey.Engine.Navigation.Drawer;
 import com.sergey.michael.sergey.Engine.TCP.Sender;
 import com.sergey.michael.sergey.Engine.Util.ads.AdManager;
@@ -45,7 +47,8 @@ public class Toolbox {
             uiOptions ^= View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN;
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+            |View.SYSTEM_UI_FLAG_LOW_PROFILE;
         }
         if (Build.VERSION.SDK_INT >= 19) {
             uiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
@@ -92,6 +95,17 @@ public class Toolbox {
         else{
             DrawerLayout drawlay = activity.findViewById(drawer_layout);
             drawlay.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
+    }
+
+    public void setupBottomNavigationView(Activity activity, int bottom_nav){
+        if(Features.bottom_nav) {
+            BottomNavigation navigation = new BottomNavigation(activity, bottom_nav);
+        }
+        else{
+            BottomNavigationView bnv = activity.findViewById(bottom_nav);
+            bnv.setVisibility(View.GONE);
+
         }
     }
 

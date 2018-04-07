@@ -21,20 +21,20 @@ public class Drawer extends Navigation{
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
+        // Handle bottom_nav_menu view item clicks here.
         int id = item.getItemId();
 
-        /*if (id == R.id.nav_camera) {
+        if (id == R.id.drawer_nav_camera) {
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.drawer_nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.drawer_nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.drawer_nav_manage) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.drawer_nav_share) {
 
-        }*/
+        }
 
         DrawerLayout drawer = activity.findViewById(drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sergey.michael.sergey.Engine.Navigation.BottomNavigation;
 import com.sergey.michael.sergey.Engine.Util.Toolbox;
 
 import static java.lang.Thread.sleep;
@@ -38,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         toolbox.setup_Toolbar(this,R.id.toolbar,R.id.app_bar_layout);
         toolbox.setup_Drawer(this, R.id.nav_view,R.id.drawer_layout,
                 R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        toolbox.setupBottomNavigationView(this, R.id.bottom_nav_view);
 
-        BottomNavigation navigation = new BottomNavigation(this,R.id.nav_view);
 
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         tv_speed.setText("Speed: "+ speed);
 
         img = findViewById(R.id.sergey);
-        manipulateImage();
+        beginRotationLoop();
         img.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 clickSergey();
@@ -81,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        //super.onBackPressed();
         toolbox.onBackPressed();
     }
 
@@ -94,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         tv_score.setText("Score: "+ high_score);
     }
 
-    public void manipulateImage(){
+    public void beginRotationLoop(){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -134,11 +132,5 @@ public class MainActivity extends AppCompatActivity {
                 tv_speed.setText("Speed: "+ speed);
             }
         });
-    }
-
-    public void AdsImpossible() {
-    }
-
-    public void AdsPossible() {
     }
 }

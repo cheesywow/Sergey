@@ -11,15 +11,14 @@ import android.widget.Toast;
 import com.sergey.michael.sergey.R;
 
 /**
- * Sets up the bottom navigation menu
+ * Sets up the bottom bottom_nav_menu menu
  */
-public class BottomNavigation extends Navigation{
+public class BottomNavigation{
     protected BottomNavigationView navigation;
     Context context;
-    public BottomNavigation(Activity activity, int nav_view){
-        super(activity, nav_view);
+    public BottomNavigation(Activity activity, int bottom_nav){
         this.context = activity.getBaseContext();
-        navigation = activity.findViewById(R.id.navigation);
+        navigation = activity.findViewById(bottom_nav);
         navigation.setSaveEnabled(true);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
@@ -35,32 +34,23 @@ public class BottomNavigation extends Navigation{
 
     private boolean createChoices(MenuItem item){
         switch (item.getItemId()) {
-            case R.id.nav_camera:
+            case R.id.bottom_nav_camera:
                 Toast.makeText(context,"Camera",Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.nav_gallary:
+            case R.id.bottom_nav_gallary:
                 Toast.makeText(context,"Gallary",Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.nav_slideshow:
+            case R.id.bottom_nav_slideshow:
                 Toast.makeText(context,"Slideshow",Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.nav_send:
+            case R.id.bottom_nav_send:
                 Toast.makeText(context,"Send",Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.nav_share:
+            case R.id.bottom_nav_share:
                 Toast.makeText(context,"Share",Toast.LENGTH_SHORT).show();
                 return true;
         }
         return false;
     }
 
-    @Override
-    public boolean onBackPressed() {
-        return false;
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
-    }
 }

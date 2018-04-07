@@ -49,8 +49,8 @@ public class AdManager {
 
         return rewardedVideoAd;
     }
-    public void loadRewardVideoAd(Activity activity, MainActivity myactivity, RewardedVideoAd rewardedVideoAd, String ad_id) {
-        RewardAdListener ra = new RewardAdListener(activity,myactivity,toolbox);
+    public void loadRewardVideoAd(Activity activity, AdHandler handler, RewardedVideoAd rewardedVideoAd, String ad_id) {
+        RewardAdListener ra = new RewardAdListener(activity,handler,toolbox);
         rewardedVideoAd.setRewardedVideoAdListener(ra);
         rewardedVideoAd.loadAd(ad_id, new AdRequest.Builder().build());
         ra.setAd(rewardedVideoAd,ad_id);

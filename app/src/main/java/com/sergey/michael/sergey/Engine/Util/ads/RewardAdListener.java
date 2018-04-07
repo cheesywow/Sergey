@@ -16,13 +16,12 @@ public class RewardAdListener implements RewardedVideoAdListener {
     String ad_id;
     Activity activity;
     Toolbox toolbox;
+    AdHandler handler;
 
-    MainActivity myactivity;
-
-    public RewardAdListener(Activity activity, MainActivity myactivity, Toolbox toolbox){
+    public RewardAdListener(Activity activity, AdHandler handler, Toolbox toolbox){
         this.activity = activity;
-        this.myactivity = myactivity;
         this.toolbox = toolbox;
+        this.handler = handler;
     }
 
     public void setAd(RewardedVideoAd rewardedVideoAd, String ad_id){
@@ -34,7 +33,7 @@ public class RewardAdListener implements RewardedVideoAdListener {
     public void onRewarded(RewardItem reward) {
         Toast.makeText(activity, "onRewarded! currency: " + reward.getType() + "  amount: " +
                 reward.getAmount(), Toast.LENGTH_SHORT).show();
-        myactivity.AdsImpossible();
+        handler.AdsImpossible();
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
         bundle.putString("reward_amount", ""+reward);
@@ -51,8 +50,8 @@ public class RewardAdListener implements RewardedVideoAdListener {
     @Override
     public void onRewardedVideoAdClosed() {
         Toast.makeText(activity, "onRewardedVideoAdClosed", Toast.LENGTH_SHORT).show();
-        toolbox.adManager.loadRewardVideoAd(activity,myactivity,rewardedVideoAd,ad_id);
-        myactivity.AdsImpossible();
+        toolbox.adManager.loadRewardVideoAd(activity,handler,rewardedVideoAd,ad_id);
+        handler.AdsImpossible();
     }
 
     @Override
@@ -62,13 +61,13 @@ public class RewardAdListener implements RewardedVideoAdListener {
 
     @Override
     public void onRewardedVideoCompleted() {
-
+        Toast.makeText(activity, "onRewardedVideoCompleted", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onRewardedVideoAdLoaded() {
         Toast.makeText(activity, "onRewardedVideoAdLoaded", Toast.LENGTH_SHORT).show();
-        myactivity.AdsPossible();
+       handler.AdsPossible();
     }
 
     @Override
