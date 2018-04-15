@@ -1,21 +1,26 @@
 package com.sergey.michael.sergey;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sergey.michael.sergey.Engine.Audio.MusicLoop;
+import com.sergey.michael.sergey.Engine.Services.BackgroundMusic;
 import com.sergey.michael.sergey.Engine.Util.Toolbox;
 
 import static java.lang.Thread.sleep;
 
 public class MainActivity extends AppCompatActivity {
+
     int high_score = 0;
     float speed = 0f;
     float rotation = 0f;
@@ -24,14 +29,21 @@ public class MainActivity extends AppCompatActivity {
     TextView tv_score;
     TextView tv_speed;
     Toolbox toolbox;
+    Thread thread;
 
     boolean spinning = true;
 
+    MusicLoop loop;
+
+    boolean Initialized = false;
+    volatile boolean activityStopped = false;
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_view);
+
+
 
         toolbox = new Toolbox(this);
         toolbox.setup_Toolbar(this,R.id.toolbar,R.id.app_bar_layout);
@@ -41,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        high_score = sharedPref.getInt(getString(R.string.preference_file_key), 0);
+                getString(R.string.servey_preference_file), Context.MODE_PRIVATE);
+        high_score = sharedPref.getInt(getString(R.string.servey_preference_file), 0);
 
         tv_score = findViewById(R.id.tvScore);
         tv_score.setText("Score: "+ high_score);
@@ -50,32 +62,55 @@ public class MainActivity extends AppCompatActivity {
         tv_speed.setText("Speed: "+ speed);
 
         img = findViewById(R.id.sergey);
-        beginRotationLoop();
+
         img.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 clickSergey();
             }
         });
+
+        beginRotationLoop();
+        if (savedInstanceState == null) {
+            Log.d("ORIENTATION",""+Initialized);
+            Log.d("MUSIC","STARTED");
+            loop = new MusicLoop();
+            loop.makebackgroundloop(getBaseContext(), R.raw.particle);
+        }
+
+
+
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         super.onPause();
+        activityStopped = true;
+        thread.interrupt();
         SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+                getString(R.string.servey_preference_file), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor;
         editor = sharedPref.edit();
-        editor.putInt(getString(R.string.preference_file_key), high_score);
+        editor.putInt(getString(R.string.score_key), high_score);
+        editor.putInt(getString(R.string.speed_key), (int) speed);
         editor.apply();
+
     }
     @Override
     public void onResume(){
         super.onResume();
         Toolbox.activiateFullscreen(this);
+
         int defaultValue = 0;
         SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        high_score = sharedPref.getInt(getString(R.string.preference_file_key), defaultValue);
+                getString(R.string.servey_preference_file), Context.MODE_PRIVATE);
+        high_score  = sharedPref.getInt(getString(R.string.score_key), defaultValue);
+        speed       = sharedPref.getInt(getString(R.string.speed_key), defaultValue);
+
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
     }
 
     @Override
@@ -93,10 +128,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void beginRotationLoop(){
-        new Thread(new Runnable() {
+        thread = new Thread(new Runnable() {
             @Override
-            public void run() {
-                while(spinning){
+            public synchronized void run() {
+                while(!activityStopped && spinning){
                     try {
                         sleep(10);
                         if(speed > 0){
@@ -119,7 +154,9 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }
-        }).start();
+        });
+
+        thread.start();
     }
 
     public void rotateImage(){
@@ -133,4 +170,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
 }
+
