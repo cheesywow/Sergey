@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Sergey</string>
-    <string name ="servey_preference_file"></string>
-    <string name ="score_key"></string>
-    <string name ="speed_key"></string>
+    <string name ="servey_preference_file">"com.sergey.michael.sergey"</string>
+    <string name ="score_key">"com.sergey.michael.sergey.score"</string>
+    <string name ="speed_key">"com.sergey.michael.sergey.speed"</string>
+
+    <string name="sergey_image_description">"Sergey's amazing face"</string>
+    <string name="tv_score">"Score:"</string>
+    <string name="tv_speed">"Speed:"</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

@@ -20,7 +20,6 @@ import com.sergey.michael.sergey.Engine.TCP.Sender;
 import com.sergey.michael.sergey.Engine.Util.ads.AdManager;
 import com.sergey.michael.sergey.Engine.Util.visual.Features;
 import com.sergey.michael.sergey.MainActivity;
-import com.sergey.michael.sergey.R;
 
 
 public class Toolbox {
