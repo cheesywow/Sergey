@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Sergey</string>
     <string name ="servey_preference_file">"com.sergey.michael.sergey"</string>
-    <string name ="score_key">"com.sergey.michael.sergey.score"</string>
-    <string name ="speed_key">"com.sergey.michael.sergey.speed"</string>
+
 
     <string name="sergey_image_description">"Sergey's amazing face"</string>
     <string name="tv_score">"Score:"</string>
@@ -11,6 +10,21 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name ="score_key">"com.sergey.michael.sergey.score"</string>
+    <string name ="speed_key">"com.sergey.michael.sergey.speed"</string>
+
+    <string name="item1_key">com.sergey.michael.sergey.item1</string>
+    <string name="item2_key">com.sergey.michael.sergey.item2</string>
+    <string name="item3_key">com.sergey.michael.sergey.item3</string>
+    <string name="item4_key">com.sergey.michael.sergey.item4</string>
+    <string name="item5_key">com.sergey.michael.sergey.item5</string>
+    <string name="item6_key">com.sergey.michael.sergey.item6</string>
+    <string name="item7_key">com.sergey.michael.sergey.item7</string>
+    <string name="item8_key">com.sergey.michael.sergey.item8</string>
+
+
+
 
     <string name="action_settings">Settings</string>
     <string name="AveragedApproach">Averaged Approach</string>

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbox toolbox;
     private ImageView img;
     private TextView tv_score;
-    private TextView tv_speed;
+    //private TextView tv_speed;
     private Bundle state;
     private MusicLoop loop;
     private volatile boolean activityStopped = false;
@@ -50,10 +50,8 @@ public class MainActivity extends AppCompatActivity {
             toolbox.setupBottomNavigationView(this, R.id.bottom_nav_view);
 
 
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.servey_preference_file), Context.MODE_PRIVATE);
-        high_score = sharedPref.getInt(getString(R.string.servey_preference_file), 0);
         tv_score = findViewById(R.id.tvScore);
+
         //tv_speed = findViewById(R.id.tvSpeed);
 
 
