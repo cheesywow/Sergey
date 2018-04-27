@@ -143,7 +143,7 @@ public class ReminderDialog extends DialogFragment {
 
         mDatePicker = new DatePickerDialog(view.getContext(), new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                    /*      Your code   to get date and time    */
+                    /*      Your code   to get inventory and cost    */
                 selectedmonth = selectedmonth + 1;
                 date.setText("" + selectedday + "/" + selectedmonth + "/" + selectedyear);
             }
@@ -174,7 +174,7 @@ public class ReminderDialog extends DialogFragment {
         getDialog().dismiss();
     }
 
-    public void scheduleNotification(Context context, long delay, int notificationId, String[] strings) {//delay is after how much time(in millis) from current time you want to schedule the notification
+    public void scheduleNotification(Context context, long delay, int notificationId, String[] strings) {//delay is after how much cost(in millis) from current cost you want to schedule the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setContentTitle(strings[0])
                 .setContentText(strings[1])

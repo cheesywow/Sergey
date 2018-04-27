@@ -1,6 +1,8 @@
 package com.sergey.michael.sergey.Engine.Util;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -10,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -20,6 +23,8 @@ import com.sergey.michael.sergey.Engine.TCP.Sender;
 import com.sergey.michael.sergey.Engine.Util.ads.AdManager;
 import com.sergey.michael.sergey.Engine.Util.visual.Features;
 import com.sergey.michael.sergey.MainActivity;
+import com.sergey.michael.sergey.R;
+import com.sergey.michael.sergey.Shop;
 
 
 public class Toolbox {
@@ -29,7 +34,6 @@ public class Toolbox {
     private Activity activity;
 
     private Sender sender;
-    private Drawer drawer;
     public AdManager adManager;
     public static String approach = "Averaged Approach";
 
@@ -84,11 +88,11 @@ public class Toolbox {
 
     public void setup_Drawer(Activity activity, int nav_view, int drawer_layout, int open, int close){
         if(Features.drawer) {
-            drawer = new Drawer(activity,nav_view,drawer_layout);
-            DrawerLayout drawer = activity.findViewById(drawer_layout);
+            new Drawer(activity,nav_view,drawer_layout);
+            DrawerLayout drawerlayout = activity.findViewById(drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                    activity, drawer, toolbar, open, close);
-            drawer.addDrawerListener(toggle);
+                    activity, drawerlayout, toolbar, open, close);
+            drawerlayout.addDrawerListener(toggle);
             toggle.syncState();
         }
         else{
@@ -120,9 +124,48 @@ public class Toolbox {
         return sender;
     }
 
+    public static void setupNavigation(final Context context, final Activity activity, final String current){
+        ImageView img_face      =   activity.findViewById(R.id.face_box);
+        ImageView img_shop      =   activity.findViewById(R.id.shop_box);
+        ImageView img_stat      =   activity.findViewById(R.id.stat_box);
+        ImageView img_setting   =   activity.findViewById(R.id.setting_box);
+
+        img_face.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!current.equals("Face")){
+                    context.startActivity(new Intent(context, MainActivity.class));
+                    activity.finish();
+                }
+            }
+        });
+
+        img_shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!current.equals("Shop")){
+                    context.startActivity(new Intent(context, Shop.class));
+                    activity.finish();
+                }
+            }
+        });
+
+        img_stat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+
+        img_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+    }
+
     public void onBackPressed() {
-        if(Features.drawer){
+        /*if(Features.drawer){
             drawer.onBackPressed();
-        }
+        }*/
     }
 }

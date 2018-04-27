@@ -11,10 +11,10 @@ public class ReminderCard extends Card {
     public static int numReminders;
     int margin;
     Activity activity;
-    public String title;
-    public String note;
-    public String date;
-    public String time;
+    public String name;
+    public String description;
+    public String inventory;
+    public String cost;
 
     public ReminderCard(Activity activity){
         super(activity);
@@ -23,10 +23,13 @@ public class ReminderCard extends Card {
     }
 
     public void makeCard(String[] messages) {
-        title = messages[0];
-        note = messages[1];
-        date = messages[2];
-        time = messages[3];
+        /**
+         * @param Strings[] name,description,inventory,cost
+         */
+        name = messages[0];
+        description = messages[1];
+        cost = messages[2];
+        inventory = messages[3];
         numReminders++;
         numCards++;
     }

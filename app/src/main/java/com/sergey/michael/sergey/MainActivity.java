@@ -1,6 +1,7 @@
 package com.sergey.michael.sergey;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.sergey.michael.sergey.Engine.Audio.MusicLoop;
 import com.sergey.michael.sergey.Engine.Util.Toolbox;
+import com.sergey.michael.sergey.Engine.Util.visual.Features;
 
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
@@ -23,70 +25,49 @@ import static java.lang.Thread.sleep;
 
 public class MainActivity extends AppCompatActivity {
 
-    int high_score = 0;
-    float speed = 0f;
-    float rotation = 0f;
+    private int high_score = 0;
+    private float speed = 0f;
+    private float rotation = 0f;
 
-    ImageView img;
-    TextView tv_score;
-    TextView tv_speed;
-    Toolbox toolbox;
-    Thread thread;
-    Bundle state;
+    private Toolbox toolbox;
+    private ImageView img;
+    private TextView tv_score;
+    private TextView tv_speed;
+    private Bundle state;
+    private MusicLoop loop;
+    private volatile boolean activityStopped = false;
 
-    boolean spinning = true;
-
-    MusicLoop loop;
-
-    boolean Initialized = false;
-    volatile boolean activityStopped = false;
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sergey);
-
+        setContentView(R.layout.activity_drawer);
         state = savedInstanceState;
-
         toolbox = new Toolbox(this);
-        //toolbox.setup_Toolbar(this,R.id.toolbar,R.id.app_bar_layout);
-        //toolbox.setup_Drawer(this, R.id.nav_view,R.id.drawer_layout,
-        //        R.string.navigation_drawer_open,R.string.navigation_drawer_close);
-        //toolbox.setupBottomNavigationView(this, R.id.bottom_nav_view);
+
+            toolbox.setup_Toolbar(this,R.id.toolbar,R.id.app_bar_layout);
+            toolbox.setup_Drawer(this, R.id.nav_view,R.id.drawer_layout,
+                    R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+            toolbox.setupBottomNavigationView(this, R.id.bottom_nav_view);
+
 
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.servey_preference_file), Context.MODE_PRIVATE);
         high_score = sharedPref.getInt(getString(R.string.servey_preference_file), 0);
-
         tv_score = findViewById(R.id.tvScore);
+        //tv_speed = findViewById(R.id.tvSpeed);
 
-        tv_speed = findViewById(R.id.tvSpeed);
 
+        Toolbox.setupNavigation(this,this,"Face");
 
         img = findViewById(R.id.sergey);
-        ImageView face = findViewById(R.id.face_box);
-
-
-        face.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //Toast.makeText(getBaseContext(),"touched",Toast.LENGTH_SHORT);
-                Log.d("Touched","Face");
-            }
-        });
-
         img.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 clickSergey();
             }
         });
 
-
         beginRotationLoop();
         if (savedInstanceState == null) {
-            Log.d("ORIENTATION",""+Initialized);
-            Log.d("MUSIC","STARTED");
             loop = new MusicLoop();
             loop.makebackgroundloop(getBaseContext(), R.raw.particle);
         }
@@ -114,18 +95,15 @@ public class MainActivity extends AppCompatActivity {
                 getString(R.string.servey_preference_file), Context.MODE_PRIVATE);
         high_score  = sharedPref.getInt(getString(R.string.score_key), defaultValue);
         if(state != null){
-            speed       = sharedPref.getInt(getString(R.string.speed_key), defaultValue);
+            speed   = sharedPref.getInt(getString(R.string.speed_key), defaultValue);
         }
         tv_score.setText(MessageFormat.format("Score: {0}", high_score));
-        tv_speed.setText(MessageFormat.format("Speed: {0}", speed));
-        //beginRotationLoop();
+        //tv_speed.setText(MessageFormat.format("Speed: {0}", speed));
     }
-
     @Override
     public void onRestart() {
         super.onRestart();
     }
-
     @Override
     public void onBackPressed(){
         toolbox.onBackPressed();
@@ -133,18 +111,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickSergey(){
         high_score +=1;
-        if(speed < 2500){
-            speed += 50;
-        }
-        tv_speed.setText(MessageFormat.format("Speed: {0}", speed));
+        if(speed < 5000){speed += 50;}
+        //tv_speed.setText(MessageFormat.format("Speed: {0}", speed));
         tv_score.setText(MessageFormat.format("Score: {0}", high_score));
     }
 
     public void beginRotationLoop(){
-        thread = new Thread(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public synchronized void run() {
-                while(!activityStopped && spinning){
+                while(!activityStopped){
                     try {
                         sleep(10);
                         if(speed > 0){
@@ -164,12 +140,9 @@ public class MainActivity extends AppCompatActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
                 }
             }
-        });
-
-        thread.start();
+        }).start();
     }
 
     public void rotateImage(){
@@ -179,10 +152,11 @@ public class MainActivity extends AppCompatActivity {
         }
         MainActivity.this.runOnUiThread(new Runnable() {public void run() {
                 img.setRotation(rotation);
-
                 //tv_speed.setText(MessageFormat.format("Speed: {0}", (int) speed));
             }
         });
     }
+
+
 }
 

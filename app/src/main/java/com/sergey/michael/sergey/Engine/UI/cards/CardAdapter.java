@@ -16,14 +16,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
     private List<ReminderCard> cardList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title,  note, date, time;
+        public TextView name, description, inventory, cost;
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.title);
-            note = (TextView) view.findViewById(R.id.note);
-            date = (TextView) view.findViewById(R.id.date);
-            time = (TextView) view.findViewById(R.id.time);
+            name = (TextView) view.findViewById(R.id.name);
+            description = (TextView) view.findViewById(R.id.description);
+            inventory = (TextView) view.findViewById(R.id.inventory);
+            cost = (TextView) view.findViewById(R.id.cost);
         }
     }
 
@@ -35,7 +35,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_card_basic, parent, false);
+                .inflate(R.layout.card_item, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -43,11 +43,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         ReminderCard card = cardList.get(position);
-        holder.title.setText(card.title);
-        holder.note.setText(card.note);
-        holder.date.setText(card.date);
-        holder.time.setText(card.time);
-
+        holder.name.setText(card.name);
+        holder.description.setText(card.description);
+        holder.cost.setText(card.cost);
+        holder.inventory.setText(card.inventory);
     }
 
     @Override

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -26,34 +27,19 @@
 
     <TextView
         android:id="@+id/tvScore"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_weight=".30"
         android:text="@string/tv_score"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/sergey_top_guideline"
-        app:layout_constraintEnd_toStartOf="@+id/sergey_mid_guideline"
-        app:layout_constraintStart_toStartOf="@+id/sergey_left_guideline"
-        app:layout_constraintTop_toTopOf="@+id/sergey_upper_guideline" />
-
-    <TextView
-        android:id="@+id/tvSpeed"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight=".30"
-        android:text="@string/tv_speed"
+        android:textSize="30dp"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/sergey_top_guideline"
         app:layout_constraintEnd_toStartOf="@+id/sergey_right_guideline"
-        app:layout_constraintStart_toStartOf="@+id/sergey_mid_guideline"
+        app:layout_constraintStart_toStartOf="@+id/sergey_left_guideline"
         app:layout_constraintTop_toTopOf="@+id/sergey_upper_guideline" />
 
     <android.support.constraint.Guideline
@@ -63,20 +49,12 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.05" />
 
-
     <android.support.constraint.Guideline
         android:id="@+id/sergey_top_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.15" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/sergey_bottom_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
 
     <android.support.constraint.Guideline
         android:id="@+id/sergey_left_guideline"
@@ -92,7 +70,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.50" />
 
-
     <android.support.constraint.Guideline
         android:id="@+id/sergey_right_guideline"
         android:layout_width="wrap_content"
@@ -100,14 +77,20 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.85" />
 
+    <android.support.constraint.Guideline
+        android:id="@+id/sergey_bottom_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sergey_bottom_guideline"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sergey_bottom_guideline">
 
         <include layout="@layout/component_bottom_nav" />
 
