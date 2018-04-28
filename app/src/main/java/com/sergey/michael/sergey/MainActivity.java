@@ -25,7 +25,7 @@ import static java.lang.Thread.sleep;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int high_score = 0;
+    private float high_score = 0;
     private float speed = 0f;
     private float rotation = 0f;
 
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     //private TextView tv_speed;
     private Bundle state;
     private MusicLoop loop;
+    int addition;
     private volatile boolean activityStopped = false;
 
     @Override
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 getString(R.string.servey_preference_file), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor;
         editor = sharedPref.edit();
-        editor.putInt(getString(R.string.score_key), high_score);
+        editor.putInt(getString(R.string.score_key), (int) high_score);
         editor.putInt(getString(R.string.speed_key), (int) speed);
         editor.apply();
     }
@@ -87,15 +88,26 @@ public class MainActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         Toolbox.activiateFullscreen(this);
-
-        int defaultValue = 0;
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.servey_preference_file), Context.MODE_PRIVATE);
+
+        int item1  = sharedPref.getInt(getString(R.string.item1_key), 0);
+        int item2  = sharedPref.getInt(getString(R.string.item2_key), 0);
+        int item3  = sharedPref.getInt(getString(R.string.item3_key), 0);
+        int item4  = sharedPref.getInt(getString(R.string.item4_key), 0);
+        int item5  = sharedPref.getInt(getString(R.string.item5_key), 0);
+        int item6  = sharedPref.getInt(getString(R.string.item6_key), 0);
+        int item7  = sharedPref.getInt(getString(R.string.item7_key), 0);
+        int item8  = sharedPref.getInt(getString(R.string.item8_key), 0);
+
+
+        addition = 1*item1 + 3*item2 + 5*item3 + 10*item4 + 25*item5 + 60*item6 + 150*item7 + 400*item8;
+        int defaultValue = 0;
         high_score  = sharedPref.getInt(getString(R.string.score_key), defaultValue);
         if(state != null){
             speed   = sharedPref.getInt(getString(R.string.speed_key), defaultValue);
         }
-        tv_score.setText(MessageFormat.format("Score: {0}", high_score));
+        tv_score.setText(MessageFormat.format("Score: {0}", (int) high_score));
         //tv_speed.setText(MessageFormat.format("Speed: {0}", speed));
     }
     @Override
@@ -111,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         high_score +=1;
         if(speed < 5000){speed += 50;}
         //tv_speed.setText(MessageFormat.format("Speed: {0}", speed));
-        tv_score.setText(MessageFormat.format("Score: {0}", high_score));
+        tv_score.setText(MessageFormat.format("Score: {0}", (int) high_score));
     }
 
     public void beginRotationLoop(){
@@ -121,11 +133,14 @@ public class MainActivity extends AppCompatActivity {
                 while(!activityStopped){
                     try {
                         sleep(10);
-                        if(speed > 0){
+                        if(speed >= 0){
                             rotateImage();
+                        }
+                        if(speed >  300){
                             speed -= 0.5f;
                         }
                         if(speed != 0 && speed % 200 == 0){
+                            speed -= 0.5f;
                             MediaPlayer mp = MediaPlayer.create(getBaseContext(), R.raw.sergey_scream);
                             mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                                 @Override
@@ -144,12 +159,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void rotateImage(){
-        rotation += 0.05 + speed/100;
+        rotation += speed/100;
         if(rotation > 360) {
             rotation -= 360;
         }
         MainActivity.this.runOnUiThread(new Runnable() {public void run() {
                 img.setRotation(rotation);
+                high_score += addition/100f;
+                tv_score.setText(MessageFormat.format("Score: {0}", (int) high_score));
                 //tv_speed.setText(MessageFormat.format("Speed: {0}", (int) speed));
             }
         });

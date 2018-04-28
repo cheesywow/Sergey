@@ -24,6 +24,7 @@ import com.sergey.michael.sergey.Engine.Util.ads.AdManager;
 import com.sergey.michael.sergey.Engine.Util.visual.Features;
 import com.sergey.michael.sergey.MainActivity;
 import com.sergey.michael.sergey.R;
+import com.sergey.michael.sergey.Settings;
 import com.sergey.michael.sergey.Shop;
 
 
@@ -159,6 +160,10 @@ public class Toolbox {
         img_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!current.equals("Settings")){
+                    context.startActivity(new Intent(context, Settings.class));
+                    activity.finish();
+                }
             }
         });
     }

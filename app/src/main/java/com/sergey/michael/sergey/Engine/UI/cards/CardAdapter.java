@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.sergey.michael.sergey.R;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> {
@@ -61,7 +62,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
                 String trunc = display.split(" ")[1];
                 String score = trunc.replaceAll(",", "");
                 int newscore = Integer.parseInt(score)-Integer.parseInt(holder.cost.getText().toString());
-                tv.setText("Score: "+newscore);
+                tv.setText(MessageFormat.format("Score: {0}", newscore));
                 int newcount =  Integer.parseInt(String.valueOf(holder.inventory.getText()))+1;
                 holder.inventory.setText(""+newcount);
                 cardList.get(position).inventory = ""+newcount;

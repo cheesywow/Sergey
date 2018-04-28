@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sergey.michael.sergey.Engine.UI.cards.CardAdapter;
@@ -20,6 +21,7 @@ import com.sergey.michael.sergey.Engine.UI.cards.ReminderCard;
 import com.sergey.michael.sergey.Engine.Util.Toolbox;
 import com.sergey.michael.sergey.Engine.Util.listeners.RecyclerTouchListener;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,13 +114,18 @@ public class Shop extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         Toolbox.activiateFullscreen(this);
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.servey_preference_file), Context.MODE_PRIVATE);
+        TextView tv = findViewById(R.id.shop_score);
+        int score  = sharedPref.getInt(getString(R.string.score_key), 0);
+        tv.setText(MessageFormat.format("Score: {0}", score));
     }
 
     @Override
     public void onPause() {
         super.onPause();
         SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.servey_preference_file), Context.MODE_PRIVATE);
+                        getString(R.string.servey_preference_file), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor;
         editor = sharedPref.edit();
         editor.putInt(getString(R.string.item1_key), Integer.parseInt(cardList.get(0).inventory));
@@ -129,6 +136,11 @@ public class Shop extends AppCompatActivity {
         editor.putInt(getString(R.string.item6_key), Integer.parseInt(cardList.get(5).inventory));
         editor.putInt(getString(R.string.item7_key), Integer.parseInt(cardList.get(6).inventory));
         editor.putInt(getString(R.string.item8_key), Integer.parseInt(cardList.get(7).inventory));
+        TextView tv = findViewById(R.id.shop_score);
+        String display = tv.getText().toString();
+        String trunc = display.split(" ")[1];
+        String score = trunc.replaceAll(",", "");
+        editor.putInt(getString(R.string.score_key), Integer.parseInt(score));
         editor.apply();
     }
 
