@@ -8,8 +8,8 @@ import java.io.InputStream;
 public abstract class MyTCP extends AsyncTask<Object,Integer,String>{
     AsyncResponse response = null;
 
-    public static String host = "52.89.132.145";
-    public static int port = 6969;
+    static String host = "52.89.132.145";
+    static int port = 6969;
 
     MyTCP(AsyncResponse delegate){
         this.response = delegate;

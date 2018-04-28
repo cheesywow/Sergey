@@ -33,9 +33,7 @@ public class Queue<E>{
 
     private void extendArray(){
         E[] newarray = (E[]) new Object[2*size];
-        for(int i =0; i<counter; i++){
-            newarray[i] = array[i];
-        }
+        System.arraycopy(array, 0, newarray, 0, counter);
         size = size*2;
         array = newarray;
     }
@@ -43,9 +41,7 @@ public class Queue<E>{
     private void shrinkArray() {
         int newSize = (counter-start);
         E[] newArray = (E[]) new Object[newSize];
-        for(int i = 0; i<counter-start;i++){
-            newArray[i] = array[i+start];
-        }
+        System.arraycopy(array, start, newArray, 0, counter - start);
         size = counter = newSize;
         start = 0;
         array = newArray;
@@ -60,12 +56,12 @@ public class Queue<E>{
     }
 
     public String toString() {
-        String string = "";
+        StringBuilder string = new StringBuilder();
         for(int i =start; i<counter; i++){
-            string = string+" "+array[i];
+            string.append(" ").append(array[i]);
         }
 
-        return string;
+        return string.toString();
     }
 }
 

@@ -1,7 +1,6 @@
 package com.sergey.michael.sergey.Engine.Navigation;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,7 +10,7 @@ import com.sergey.michael.sergey.R;
 
 public class Drawer extends Navigation{
 
-    int drawer_layout;
+    private int drawer_layout;
 
     public Drawer(Activity activity, int nav_view, int drawer_layout) {
         super(activity,nav_view);

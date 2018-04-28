@@ -9,22 +9,21 @@ import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.sergey.michael.sergey.Engine.Util.Toolbox;
-import com.sergey.michael.sergey.MainActivity;
 
 public class RewardAdListener implements RewardedVideoAdListener {
-    RewardedVideoAd rewardedVideoAd;
-    String ad_id;
-    Activity activity;
-    Toolbox toolbox;
-    AdHandler handler;
+    private RewardedVideoAd rewardedVideoAd;
+    private String ad_id;
+    private Activity activity;
+    private Toolbox toolbox;
+    private AdHandler handler;
 
-    public RewardAdListener(Activity activity, AdHandler handler, Toolbox toolbox){
+    RewardAdListener(Activity activity, AdHandler handler, Toolbox toolbox){
         this.activity = activity;
         this.toolbox = toolbox;
         this.handler = handler;
     }
 
-    public void setAd(RewardedVideoAd rewardedVideoAd, String ad_id){
+    void setAd(RewardedVideoAd rewardedVideoAd, String ad_id){
         this.rewardedVideoAd = rewardedVideoAd;
         this.ad_id = ad_id;
     }

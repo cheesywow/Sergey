@@ -6,9 +6,9 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdListener;
 
 public class BannerListener extends AdListener {
-    Activity activity;
+    private Activity activity;
 
-    public BannerListener(Activity activity){
+    BannerListener(Activity activity){
         this.activity = activity;
     }
 

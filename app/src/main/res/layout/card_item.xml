@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:textSize="30sp"
-                android:text="Name"
+                android:text="@string/cardName"
                 />
 
             <TextView
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/name"
-                android:text="note"
+                android:text="@string/cardNote"
                 />
 
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_above="@+id/inventory"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:text="100"
+                android:text="@string/cardCost"
                 android:textSize="20sp" />
 
             <TextView
@@ -55,7 +55,7 @@
                 android:layout_alignBottom="@+id/description"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:text="0"
+                android:text="@string/cardAmount"
                 android:textSize="20sp" />
 
         </RelativeLayout>

@@ -23,6 +23,10 @@
     <string name="item7_key">com.sergey.michael.sergey.item7</string>
     <string name="item8_key">com.sergey.michael.sergey.item8</string>
 
+    <string name="click_key">com.sergey.michael.sergey.numclicks</string>
+    <string name="items_key">com.sergey.michael.sergey.numitems</string>
+    <string name="timeplayed_key">com.sergey.michael.sergey.timeplayed</string>
+    <string name="pointpersec">com.sergey.michael.sergey.pointpersec</string>
 
 
 
@@ -34,4 +38,10 @@
 
     <string name="PashBoard">Pashboard</string>
     <string name="communicate">Communicate</string>
+    <string name="cardName">name</string>
+    <string name="cardNote">note</string>
+    <string name="cardCost">cost</string>
+    <string name="cardAmount">amount</string>
+    <string name="reset_inventory">Reset Inventory</string>
+    <string name="reset_score">Reset Score</string>
 </resources>

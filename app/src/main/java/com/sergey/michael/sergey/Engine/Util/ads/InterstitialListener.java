@@ -9,10 +9,10 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
 public class InterstitialListener extends AdListener {
-    Activity activity;
-    InterstitialAd interstitialAd;
+    private Activity activity;
+    private InterstitialAd interstitialAd;
 
-    public InterstitialListener(Activity activity, InterstitialAd interstitialAd){
+    InterstitialListener(Activity activity, InterstitialAd interstitialAd){
         this.activity = activity;
         this.interstitialAd = interstitialAd;
     }

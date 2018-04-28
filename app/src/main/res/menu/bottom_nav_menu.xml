@@ -6,30 +6,30 @@
         android:id="@+id/bottom_nav_camera"
         android:checked="false"
         android:icon="@drawable/ic_menu_camera"
-        android:title="Lock"/>
+        android:title=""/>
 
     <item
         android:id="@+id/bottom_nav_gallary"
         android:checked="false"
         android:icon="@drawable/ic_menu_gallery"
-        android:title="Forum"/>
+        android:title=""/>
 
     <item
         android:id="@+id/bottom_nav_slideshow"
         android:checked="false"
         android:icon="@drawable/ic_menu_slideshow"
-        android:title="Notes"/>
+        android:title=""/>
 
     <item
         android:id="@+id/bottom_nav_send"
         android:checked="false"
         android:icon="@drawable/ic_menu_send"
-        android:title="Reminders"/>
+        android:title=""/>
 
     <item
         android:id="@+id/bottom_nav_share"
         android:checked="false"
         android:icon="@drawable/ic_menu_share"
-        android:title="Settings"/>
+        android:title=""/>
 
 </menu>

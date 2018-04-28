@@ -1,5 +1,6 @@
 package com.sergey.michael.sergey.Engine.UI.cards;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.View;
 import com.sergey.michael.sergey.Engine.Util.code.Metrics;
 
 
+@SuppressLint("ViewConstructor")
 public class ReminderCard extends Card {
     public static int numReminders;
     int margin;
@@ -23,9 +25,6 @@ public class ReminderCard extends Card {
     }
 
     public void makeCard(String[] messages) {
-        /**
-         * @param Strings[] name,description,inventory,cost
-         */
         name = messages[0];
         description = messages[1];
         cost = messages[2];

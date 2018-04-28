@@ -2,13 +2,10 @@ package com.sergey.michael.sergey.Engine.Audio;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.util.Log;
-
-import com.sergey.michael.sergey.R;
 
 public class MusicLoop {
 
-    static Music music;
+    private Music music;
 
     public void makebackgroundloop(Context context, int musicId){
         if(music == null){
@@ -19,7 +16,6 @@ public class MusicLoop {
             music.execute(mp);
         }
     }
-
 
     public void stopLoop(){
         music.cancel(true);

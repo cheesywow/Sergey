@@ -8,16 +8,14 @@ import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.sergey.michael.sergey.Engine.Util.Toolbox;
-import com.sergey.michael.sergey.MainActivity;
-import com.sergey.michael.sergey.R;
 
 public class AdManager {
 
-    Toolbox toolbox;
-    String app_id ="ca-app-pub-8954833416551696~1983175835";
+    private Toolbox toolbox;
 
     public AdManager(Activity activity, Toolbox toolbox){
         this.toolbox = toolbox;
+        String app_id = "ca-app-pub-8954833416551696~1983175835";
         MobileAds.initialize(activity, app_id);
     }
 
@@ -45,11 +43,9 @@ public class AdManager {
     }
 
     public RewardedVideoAd loadRewardVideo(Activity activity, String ad_id){
-        RewardedVideoAd rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(activity);
-
-        return rewardedVideoAd;
+        return MobileAds.getRewardedVideoAdInstance(activity);
     }
-    public void loadRewardVideoAd(Activity activity, AdHandler handler, RewardedVideoAd rewardedVideoAd, String ad_id) {
+    void loadRewardVideoAd(Activity activity, AdHandler handler, RewardedVideoAd rewardedVideoAd, String ad_id) {
         RewardAdListener ra = new RewardAdListener(activity,handler,toolbox);
         rewardedVideoAd.setRewardedVideoAdListener(ra);
         rewardedVideoAd.loadAd(ad_id, new AdRequest.Builder().build());

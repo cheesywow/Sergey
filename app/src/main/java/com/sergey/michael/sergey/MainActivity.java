@@ -1,24 +1,18 @@
 package com.sergey.michael.sergey;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sergey.michael.sergey.Engine.Audio.MusicLoop;
 import com.sergey.michael.sergey.Engine.Util.Toolbox;
-import com.sergey.michael.sergey.Engine.Util.visual.Features;
 
-import java.text.DecimalFormat;
 import java.text.MessageFormat;
 
 import static java.lang.Thread.sleep;
@@ -28,13 +22,13 @@ public class MainActivity extends AppCompatActivity {
     private float high_score = 0;
     private float speed = 0f;
     private float rotation = 0f;
-
+    private int clicks = 0;
+    private long time;
     private Toolbox toolbox;
     private ImageView img;
     private TextView tv_score;
     //private TextView tv_speed;
     private Bundle state;
-    private MusicLoop loop;
     int addition;
     private volatile boolean activityStopped = false;
 
@@ -67,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         beginRotationLoop();
         if (savedInstanceState == null) {
-            loop = new MusicLoop();
+            MusicLoop loop = new MusicLoop();
             loop.makebackgroundloop(getBaseContext(), R.raw.particle);
         }
     }
@@ -82,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
         editor = sharedPref.edit();
         editor.putInt(getString(R.string.score_key), (int) high_score);
         editor.putInt(getString(R.string.speed_key), (int) speed);
+        editor.putInt(getString(R.string.click_key),
+                sharedPref.getInt(getString(R.string.click_key),0) + clicks);
+        long time_before = sharedPref.getLong(getString(R.string.timeplayed_key),0);
+        long total_time = time_before+(System.currentTimeMillis()-time);
+        editor.putLong(getString(R.string.timeplayed_key), total_time);
         editor.apply();
     }
     @Override
@@ -90,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbox.activiateFullscreen(this);
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.servey_preference_file), Context.MODE_PRIVATE);
-
+        SharedPreferences.Editor editor;
+        editor = sharedPref.edit();
         int item1  = sharedPref.getInt(getString(R.string.item1_key), 0);
         int item2  = sharedPref.getInt(getString(R.string.item2_key), 0);
         int item3  = sharedPref.getInt(getString(R.string.item3_key), 0);
@@ -101,14 +101,21 @@ public class MainActivity extends AppCompatActivity {
         int item8  = sharedPref.getInt(getString(R.string.item8_key), 0);
 
 
-        addition = 1*item1 + 3*item2 + 5*item3 + 10*item4 + 25*item5 + 60*item6 + 150*item7 + 400*item8;
+        addition = item1 + 3*item2 + 5*item3 + 10*item4 + 25*item5 + 60*item6 + 150*item7 + 400*item8;
+        editor.putInt(getString(R.string.pointpersec),addition);
+        TextView pointpersec = findViewById(R.id.tv_poitpersec);
+        pointpersec.setText(MessageFormat.format("{0} pps", addition));
         int defaultValue = 0;
         high_score  = sharedPref.getInt(getString(R.string.score_key), defaultValue);
         if(state != null){
             speed   = sharedPref.getInt(getString(R.string.speed_key), defaultValue);
         }
+        if(high_score > 0){
+            speed = 150;
+        }
         tv_score.setText(MessageFormat.format("Score: {0}", (int) high_score));
         //tv_speed.setText(MessageFormat.format("Speed: {0}", speed));
+        time = System.currentTimeMillis();
     }
     @Override
     public void onRestart() {
@@ -120,10 +127,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickSergey(){
-        high_score +=1;
+        high_score++;
         if(speed < 5000){speed += 50;}
         //tv_speed.setText(MessageFormat.format("Speed: {0}", speed));
         tv_score.setText(MessageFormat.format("Score: {0}", (int) high_score));
+        clicks++;
     }
 
     public void beginRotationLoop(){

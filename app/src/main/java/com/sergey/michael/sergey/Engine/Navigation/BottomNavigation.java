@@ -2,7 +2,6 @@ package com.sergey.michael.sergey.Engine.Navigation;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
@@ -14,23 +13,20 @@ import com.sergey.michael.sergey.R;
  * Sets up the bottom bottom_nav_menu menu
  */
 public class BottomNavigation{
-    protected BottomNavigationView navigation;
-    Context context;
+    private Context context;
     public BottomNavigation(Activity activity, int bottom_nav){
         this.context = activity.getBaseContext();
-        navigation = activity.findViewById(bottom_nav);
+        BottomNavigationView navigation = activity.findViewById(bottom_nav);
         navigation.setSaveEnabled(true);
+        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return createChoices(item);
+            }
+        };
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
-
-    protected BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            return createChoices(item);
-        }
-    };
 
     private boolean createChoices(MenuItem item){
         switch (item.getItemId()) {

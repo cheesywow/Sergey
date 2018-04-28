@@ -3,8 +3,6 @@ package com.sergey.michael.sergey.Engine.Navigation;
 import android.app.Activity;
 import android.support.design.widget.NavigationView;
 
-import com.sergey.michael.sergey.R;
-
 
 public abstract class Navigation implements NavigationView.OnNavigationItemSelectedListener{
 

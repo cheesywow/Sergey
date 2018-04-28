@@ -26,6 +26,7 @@ import com.sergey.michael.sergey.MainActivity;
 import com.sergey.michael.sergey.R;
 import com.sergey.michael.sergey.Settings;
 import com.sergey.michael.sergey.Shop;
+import com.sergey.michael.sergey.Stats;
 
 
 public class Toolbox {
@@ -154,6 +155,10 @@ public class Toolbox {
         img_stat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!current.equals("Stats")) {
+                    context.startActivity(new Intent(context, Stats.class));
+                    activity.finish();
+                }
             }
         });
 
