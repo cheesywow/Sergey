@@ -1,5 +1,6 @@
 package com.sergey.michael.sergey.Engine.UI.cards;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,8 @@ import java.util.List;
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> {
 
     private List<ReminderCard> cardList;
+    Activity activity;
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name, description, inventory, cost;
@@ -33,8 +36,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
     }
 
 
-    public CardAdapter(List<ReminderCard> moviesList) {
+    public CardAdapter(Activity activity, List<ReminderCard> moviesList) {
         this.cardList = moviesList;
+        this.activity = activity;
     }
 
     @Override
@@ -46,13 +50,21 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final ReminderCard card = cardList.get(position);
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int newscore =  Integer.parseInt(card.inventory)+1;
-                holder.inventory.setText("1000");
+                //holder.card.setCardBackgroundColor(Color.BLUE);
+                TextView tv = activity.findViewById(R.id.shop_score);
+                String display = tv.getText().toString();
+                String trunc = display.split(" ")[1];
+                String score = trunc.replaceAll(",", "");
+                int newscore = Integer.parseInt(score)-Integer.parseInt(holder.cost.getText().toString());
+                tv.setText("Score: "+newscore);
+                int newcount =  Integer.parseInt(String.valueOf(holder.inventory.getText()))+1;
+                holder.inventory.setText(""+newcount);
+                cardList.get(position).inventory = ""+newcount;
             }
         });
         holder.name.setText(card.name);
