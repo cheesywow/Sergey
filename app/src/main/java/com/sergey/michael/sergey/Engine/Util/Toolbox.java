@@ -103,9 +103,9 @@ public class Toolbox {
         }
     }
 
-    public void setupBottomNavigationView(Activity activity, int bottom_nav){
+    public static void setupBottomNavigationView(Activity activity, int bottom_nav){
         if(Features.bottom_nav) {
-            BottomNavigation navigation = new BottomNavigation(activity, bottom_nav);
+            new BottomNavigation(activity, bottom_nav);
         }
         else{
             BottomNavigationView bnv = activity.findViewById(bottom_nav);
