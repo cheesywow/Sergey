@@ -47,8 +47,7 @@ public class Shop extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                //ReminderCard card = cardList.get(position);
-                // Toast.makeText(getBaseContext(), (position+1) + " is selected!", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -60,9 +59,8 @@ public class Shop extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.servey_preference_file), Context.MODE_PRIVATE);
 
-
+        //create cards for the menu
         int inventory;
-
         String[] strings = new String[4];
         inventory  = sharedPref.getInt(getString(R.string.item1_key), 0);
         strings[0] = "Poker";   strings[1] = "1 point per second";
@@ -121,6 +119,7 @@ public class Shop extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
+        //save all the inventory
         SharedPreferences sharedPref = getSharedPreferences(
                         getString(R.string.servey_preference_file), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor;
@@ -151,7 +150,6 @@ public class Shop extends AppCompatActivity {
         card.makeCard(strings);
         cardList.add(card);
         mAdapter.notifyDataSetChanged();
-        //layout.addView(card,linear);
         return card;
     }
 }
